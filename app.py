@@ -4,6 +4,11 @@ import parselmouth
 
 app = Flask(__name__)
 
+# 기본 경로("/")에 대한 응답
+@app.route('/')
+def home():
+    return "Flask Praat Server is running!"
+
 @app.route('/analyze', methods=['POST'])
 def analyze_audio():
     if 'file' not in request.files:
