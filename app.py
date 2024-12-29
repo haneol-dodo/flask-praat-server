@@ -1,6 +1,6 @@
+import os
 from flask import Flask, request, jsonify
 import parselmouth
-import os
 
 app = Flask(__name__)
 
@@ -36,5 +36,8 @@ def analyze_audio():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# Render와 호환되는 호스트 및 포트 설정
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Render의 환경 변수 PORT 사용, 기본값은 5000
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
